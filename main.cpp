@@ -6,11 +6,12 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:41:06 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/08 18:42:14 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:14:13 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Sample.hpp"
+#include <iostream>
 
 int	main(void)
 {

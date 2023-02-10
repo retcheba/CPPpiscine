@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sample.cpp                                         :+:      :+:    :+:   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 18:36:21 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/10 17:13:56 by retcheba         ###   ########.fr       */
+/*   Created: 2023/02/10 17:49:56 by retcheba          #+#    #+#             */
+/*   Updated: 2023/02/10 17:58:53 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Sample.hpp"
+#include <string>
 
-Sample::Sample(void)
+int	main(int argc, char **argv)
 {
-	std::cout << "Constructor called" << std::endl;
+	int	i = 0;
+	int j = 0;
 
-	this->var = 42;
-	std::cout << "this->var: " << this->var << std::endl;
-
-	this->function();
-	return;
-}
-
-Sample::~Sample(void)
-{
-	std::cout << "Destructor called" << std::endl;
-	return;
-}
-
-void	Sample::function(void)
-{
-	std::cout << "Function called" << std::endl;
-	return;
+	if (argc > 1)
+	{
+		while (argv[++i])
+		{
+			j = -1;
+			while (argv[i][++j])
+			{
+				if (argv[i][j] >= 'a' && argv[i][j] <= 'z')
+					argv[i][j] -= 32;
+				std::cout << argv[i][j];
+			}
+		}	
+	}
+	else
+	{
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+	}
+	std::cout << std::endl;
+	return (0);
 }

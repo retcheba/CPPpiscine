@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:31:22 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/08 18:35:11 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:14:50 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,14 @@ class Sample
 
 public:
 
+	int	var;
+	
+	//	Constructor & Destructor
 	Sample(void);
 	~Sample(void);
+
+	//	Member Functions
+	void	function(void);
 
 };
 
