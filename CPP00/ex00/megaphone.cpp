@@ -6,29 +6,27 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:49:56 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/10 17:58:53 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:58:27 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+#include <locale>
 
 int	main(int argc, char **argv)
 {
-	int	i = 0;
-	int j = 0;
+	std::locale	loc;
+	std::string	str;
 
 	if (argc > 1)
 	{
-		while (argv[++i])
+		int	j = 0;
+		while (argv[++j])
 		{
-			j = -1;
-			while (argv[i][++j])
-			{
-				if (argv[i][j] >= 'a' && argv[i][j] <= 'z')
-					argv[i][j] -= 32;
-				std::cout << argv[i][j];
-			}
+			str = (std::string)argv[j];
+			for (std::string::size_type i = 0; i < str.length(); ++i)
+    			std::cout << std::toupper(str[i],loc);
 		}	
 	}
 	else
