@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:12:11 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/13 19:03:10 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:15:22 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@ public:
 	Contact(void);
 	~Contact(void);
 
+	void	set_contact(int nb_contact);
+	void	get_contact(void) const;
+	void	get_complete_contact(std::string index) const;
+
 private:
 
+	int	index;
 	std::string	first_name;
 	std::string	last_name;
 	std::string	nickname;
