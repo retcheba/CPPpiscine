@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:12:16 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/15 19:17:53 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:49:31 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	Contact::set_contact(int nb_contact)
 
 void	Contact::get_contact(void) const
 {
-	std::cout << "|" << this->index << "         ";
+	std::cout << "|" << "         " << this->index;
 	if (this->first_name.size() > 10)
 	{
 		std::cout << "|";
@@ -65,9 +65,10 @@ void	Contact::get_contact(void) const
 	}
 	else
 	{
-		std::cout << "|" << this->first_name;
+		std::cout << "|";
 		for (std::string::size_type i = 0; i < 10 - this->first_name.size(); i++)
 			std::cout << " ";
+		std::cout << this->first_name;
 	}
 	if (this->last_name.size() > 10)
 	{
@@ -78,9 +79,10 @@ void	Contact::get_contact(void) const
 	}
 	else
 	{
-		std::cout << "|" << this->last_name;
+		std::cout << "|";
 		for (std::string::size_type i = 0; i < 10 - this->last_name.size(); i++)
 			std::cout << " ";
+		std::cout << this->last_name;
 	}
 	if (this->nickname.size() > 10)
 	{
@@ -91,9 +93,10 @@ void	Contact::get_contact(void) const
 	}
 	else
 	{
-		std::cout << "|" << this->nickname;
+		std::cout << "|";
 		for (std::string::size_type i = 0; i < 10 - this->nickname.size(); i++)
 			std::cout << " ";
+		std::cout << this->nickname;
 	}
 	std::cout << "|" << std::endl;
 	return;

@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:11:26 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/15 19:15:41 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:45:48 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	PhoneBook::search_contact(void)
 	}
 	std::cout << std::endl;
 	std::cout << "---------------------------------------------" << std::endl;
-	std::cout << "|Index     |First Name|Last Name |Nickname  |" << std::endl;
+	std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
 	std::cout << "---------------------------------------------" << std::endl;
 	for (int i = 0; i < this->nb_contact; i++)
 	{
