@@ -1,4 +1,4 @@
-SRCS		= test.cpp Account.cpp
+SRCS		= tests.cpp Account.cpp
 OBJS		= $(SRCS:.cpp=.o)
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98 -D TIMESTAMP=$$(date +%Y%m%d%H%M%S)
