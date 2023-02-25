@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:10:47 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/15 18:09:44 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:16:19 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 	std::string	buff;
 
 	(void)repertory;
-	std::cout << "\033[1m***    Welcome in My Awesome PhoneBook    ***\033[0m" << std::endl << std::endl;	
+	std::cout << std::endl << "\033[1m***    Welcome in My Awesome PhoneBook    ***\033[0m" << std::endl << std::endl;	
 	while (true)
 	{
 		std::cout << "What do you want to do?" << std::endl;
@@ -30,7 +30,7 @@ int	main(void)
 			break;
 		if (buff.compare("EXIT") == 0)
 		{
-			std::cout << std::endl << "\033[1m***               Goodbye!                ***\033[0m" << std::endl;
+			std::cout << std::endl << "\033[1m***               Goodbye!                ***\033[0m" << std::endl << std::endl;
 			break;
 		}
 		else if (buff.compare("ADD") == 0)
@@ -40,6 +40,8 @@ int	main(void)
 		else
 			std::cout << std::endl << "Sorry I don't understand." << std::endl;
 		std::cout << std::endl;
+		if (!std::cin.good())
+			break;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:12:16 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/24 20:49:31 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:10:04 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 Contact::Contact(void)
 {
-	std::cout << "Contact created" << std::endl;
+//	std::cout << "Contact created" << std::endl;
 	return;
 }
 
 Contact::~Contact(void)
 {
-	std::cout << "Contact destroyed" << std::endl;
+//	std::cout << "Contact destroyed" << std::endl;
 	return;
 }
 
