@@ -6,13 +6,14 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:26:36 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/08 15:10:40 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:51:31 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
 # define FIXED_HPP
 
+# include <string>
 # include <iostream>
 # include <math.h>
 
