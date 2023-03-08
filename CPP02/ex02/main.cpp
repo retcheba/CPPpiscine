@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:23:34 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/08 15:02:10 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:43:11 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ int	main( void )
 	std::cout << "++a = "<< ++a << std::endl;
 	std::cout << "a = " << a << std::endl;
 	std::cout << "a++ = " << a++ << std::endl;
+	std::cout << "a = " << a << std::endl << std::endl;
+
+	std::cout << "--a = "<< --a << std::endl;
+	std::cout << "a = " << a << std::endl;
+	std::cout << "a-- = " << a-- << std::endl;
 	std::cout << "a = " << a << std::endl << std::endl;
 
 	std::cout << "max(a, b) = " << Fixed::max( a, b ) << std::endl;

@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:26:22 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/08 17:32:34 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:42:05 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,22 @@ Fixed	Fixed::operator++( int )
 	Fixed	tmp;
 
 	tmp.setRawBits(this->_nb++);
+	return (tmp);
+}
+
+//	pre-decrementation
+Fixed	Fixed::operator--( void )
+{
+	this->_nb--;
+	return (*this);
+}
+
+//	post-decrementation
+Fixed	Fixed::operator--( int )
+{
+	Fixed	tmp;
+
+	tmp.setRawBits(this->_nb--);
 	return (tmp);
 }
 

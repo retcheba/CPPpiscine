@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:26:36 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/08 17:31:35 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:41:23 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ public:
 
 	Fixed		operator++( void );
 	Fixed		operator++( int );
+	Fixed		operator--( void );
+	Fixed		operator--( int );
 
 	static Fixed	min( Fixed & first, Fixed & second );
 	static Fixed	min( Fixed const & first, Fixed const & second );
