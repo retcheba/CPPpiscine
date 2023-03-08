@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:26:36 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/07 16:35:59 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:30:27 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ private:
 };
 
 std::ostream &	operator<<( std::ostream & o, Fixed const & rhs );
+float			ft_pow( const float base, const float exponent );
 
 #endif
