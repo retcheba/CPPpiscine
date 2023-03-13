@@ -6,18 +6,19 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:59:52 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/13 09:58:17 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:17:05 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int	main( void )
 {
-	ScavTrap	Default;
-	ScavTrap	Charlotte("Charlotte");
-	ScavTrap	Copy(Charlotte);
+	FragTrap	Default;
+	FragTrap	Charlotte("Charlotte");
+	FragTrap	Copy(Charlotte);
 
 	std::cout << std::endl;
 
@@ -29,7 +30,7 @@ int	main( void )
 
 	Charlotte.beRepaired(8);
 	Default.takeDamage(10);
-	Copy.guardGate();
+	Copy.highFivesGuys();
 
 	std::cout << std::endl;
 

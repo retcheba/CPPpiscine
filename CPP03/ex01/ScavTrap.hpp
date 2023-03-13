@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:00:42 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/11 19:06:03 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/13 09:51:14 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ public:
 
 	ScavTrap &		operator=( ScavTrap const & rhs );
 	virtual void	attack( const std::string& target );
+	void guardGate( void );
 
 private:
 
