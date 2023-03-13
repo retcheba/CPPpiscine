@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:02:06 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/13 10:08:42 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:24:30 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ public:
 	FragTrap( FragTrap const & src );
 	~FragTrap( void );
 
-	FragTrap &		operator=( FragTrap const & rhs );
-	virtual void	attack( const std::string& target );
-	void  			highFivesGuys( void );
+	FragTrap &	operator=( FragTrap const & rhs );
+	void		attack( const std::string& target );
+	void  		highFivesGuys( void );
 
 private:
 

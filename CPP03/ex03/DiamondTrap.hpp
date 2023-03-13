@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:30:54 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/13 11:30:16 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:40:19 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ public:
 	~DiamondTrap( void );
 
 	DiamondTrap &	operator=( DiamondTrap const & rhs );
-	virtual void	attack( const std::string& target );
+	void			attack( const std::string& target );
 	void			whoAmI( void );
 
 private:

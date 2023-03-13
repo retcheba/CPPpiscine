@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:00:45 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/13 09:51:56 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:20:14 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ public:
 	ClapTrap( void );
 	ClapTrap( std::string name );
 	ClapTrap( ClapTrap const & src );
-	~ClapTrap( void );
+	virtual ~ClapTrap( void );
 
 	ClapTrap &		operator=( ClapTrap const & rhs );
 	virtual void	attack( const std::string& target );
