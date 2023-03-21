@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:26:45 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/21 01:29:05 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:06:15 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ int	main( void )
 	me->use(2, *bob);
 	me->use(3, *bob);
 	me->use(4, *bob);
+
+	std::cout << std::endl;
+
+	me->unequip(0);
+	me->unequip(0);
+	me->unequip(1);
+	me->unequip(2);
+	me->unequip(3);
+	me->unequip(4);
 
 	std::cout << std::endl;
 

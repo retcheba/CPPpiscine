@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:44:26 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/21 01:09:22 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:05:19 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ void	Character::use(int idx, ICharacter& target)
 		if (this->_items[idx] != NULL)
 			this->_items[idx]->use(target);
 		else
-			std::cout << "There are no items in this area of the inventory" << std::endl;
+			std::cout << "There are no items in this area to be use" << std::endl;
 	}
 	else
-		std::cout << "There are no items in this area of the inventory" << std::endl;
+		std::cout << "There are no items in this area to be use" << std::endl;
 	return;
 }
 
@@ -133,15 +133,24 @@ void	Character::unequip(int idx)
 {
 	if (idx >= 0 && idx < 4)
 	{
-		int	i = 0;
-		while ( this->_trash[i] != NULL && i < 42 )
-			i++;
-		if ( i < 42 )
+		if ( this->_items[idx] != NULL )
 		{
-			std::cout << "A character has unequipped an item" << std::endl;
-			this->_trash[i] = this->_items[idx];
-			this->_items[idx] = NULL;
+			int	i = 0;
+			while ( this->_trash[i] != NULL && i < 42 )
+				i++;
+			if ( i < 42 )
+			{
+				std::cout << "A character has unequipped an item" << std::endl;
+				this->_trash[i] = this->_items[idx];
+				this->_items[idx] = NULL;
+			}
+			else
+				std::cout << "The trash is full" << std::endl;
 		}
+		else
+			std::cout << "There are no items in this area to be unequipped" << std::endl;
 	}
+	else
+		std::cout << "There are no items in this area to be unequipped" << std::endl;
 	return;
 }
