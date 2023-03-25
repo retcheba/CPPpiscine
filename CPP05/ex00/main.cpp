@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sample.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 18:36:21 by retcheba          #+#    #+#             */
-/*   Updated: 2023/02/10 17:13:56 by retcheba         ###   ########.fr       */
+/*   Created: 2023/03/25 13:58:36 by retcheba          #+#    #+#             */
+/*   Updated: 2023/03/25 14:08:22 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "Sample.hpp"
+#include "Bureaucrat.hpp"
 
-Sample::Sample(void)
+int	main( void )
 {
-	std::cout << "Constructor called" << std::endl;
+	Bureaucrat*	Paul = new Bureaucrat( "Paul", 150 );
+	Bureaucrat*	Copy = new Bureaucrat( *Paul );
+	Bureaucrat*	Default = new Bureaucrat();
 
-	this->var = 42;
-	std::cout << "this->var: " << this->var << std::endl;
+	std::cout << *Default;
+	std::cout << *Copy;
+	std::cout << *Paul;
+	Paul->incrementGrade();
+	std::cout << *Paul;
+	Paul->decrementGrade();
+	std::cout << *Paul;
 
-	this->function();
-	return;
-}
+	delete Paul;
+	delete Copy;
+	delete Default;
 
-Sample::~Sample(void)
-{
-	std::cout << "Destructor called" << std::endl;
-	return;
-}
-
-void	Sample::function(void)
-{
-	std::cout << "Function called" << std::endl;
-	return;
+	return 0;
 }
