@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:37:10 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/25 14:49:04 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:35:04 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ public:
 	int					getGrade( void ) const;
 	void				incrementGrade( void );
 	void				decrementGrade( void );
+
+	class GradeTooHighException: public std::exception
+	{
+	public:	
+		virtual const char*	what() const throw();
+	};
+
+	class GradeTooLowException: public std::exception
+	{
+	public:
+		virtual const char*	what() const throw();
+	};
 
 private:
 

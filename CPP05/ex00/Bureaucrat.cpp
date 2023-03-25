@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:36:58 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/25 15:11:26 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:20:24 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ Bureaucrat::Bureaucrat( void ) : _name("default_name"), _grade(150)
 Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name), _grade(grade)
 {
 	std::cout << "Bureaucrat constructor called" << std::endl;
+	if ( this->_grade < 1 )
+		throw (Bureaucrat::GradeTooHighException());
+	if ( this->_grade > 150 )
+		throw (Bureaucrat::GradeTooLowException());
 	return;
 }
 
@@ -28,7 +32,10 @@ Bureaucrat::Bureaucrat( Bureaucrat const & src ) : _name(src._name), _grade(src.
 {
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
 	*this = src;
-
+	if ( this->_grade < 1 )
+		throw (Bureaucrat::GradeTooHighException());
+	if ( this->_grade > 150 )
+		throw (Bureaucrat::GradeTooLowException());
 	return;
 }
 
@@ -57,30 +64,36 @@ int		Bureaucrat::getGrade( void ) const
 void	Bureaucrat::incrementGrade( void )
 {
 	this->_grade -= 1;
-	if ( _grade < 1 )
-		throw std::string("Error: Grade Too High");
-	if ( _grade > 150 )
-		throw std::string("Error: Grade Too Low");
+	if ( this->_grade < 1 )
+		throw (Bureaucrat::GradeTooHighException());
+	if ( this->_grade > 150 )
+		throw (Bureaucrat::GradeTooLowException());
 	return;
 }
 
 void	Bureaucrat::decrementGrade( void )
 {
 	this->_grade += 1;
-	if ( _grade < 1 )
-		throw std::string("Error: Grade Too High");
-	if ( _grade > 150 )
-		throw std::string("Error: Grade Too Low");
+	if ( this->_grade < 1 )
+		throw (Bureaucrat::GradeTooHighException());
+	if ( this->_grade > 150 )
+		throw (Bureaucrat::GradeTooLowException());
 	return;
 }
 
 std::ostream &	operator<<( std::ostream & o, Bureaucrat const & rhs )
 {
-	if ( rhs.getGrade() < 1 )
-		throw std::string("Error: Grade Too High");
-	if ( rhs.getGrade() > 150 )
-		throw std::string("Error: Grade Too Low");
 	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
 
 	return o;
+}
+
+const char*	Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Error: Grade Too High");
+}
+
+const char*	Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("Error: Grade Too Low");
 }

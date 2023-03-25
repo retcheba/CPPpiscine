@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:58:36 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/25 15:16:17 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:54:05 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,102 @@
 
 int	main( void )
 {
-	Bureaucrat*	Paul = new Bureaucrat( "Paul", 149 );
-	Bureaucrat*	Copy = new Bureaucrat( *Paul );
-	Bureaucrat*	Default = new Bureaucrat();
-	std::cout << std::endl;
-	
-	try
+	std::cout << "TEST 1" << std::endl;
 	{
-		std::cout << *Paul;
-		std::cout << *Copy;
-		std::cout << *Default;
-		std::cout << std::endl;
-		
-		Paul->incrementGrade();
-		std::cout << *Paul;
-		Paul->decrementGrade();
-		std::cout << *Paul;
-		Paul->decrementGrade();
-		std::cout << *Paul;
-		std::cout << std::endl;
-	}
-	catch (std::string const & error)
-	{
-		std::cout << error << std::endl;
-		std::cout << std::endl;
+		try
+		{
+			Bureaucrat	Paul( "Paul", 50 );
+			Bureaucrat	Copy( Paul );
+			Bureaucrat	Default;
+
+			std::cout << Paul;
+			std::cout << Copy;
+			std::cout << Default;
+
+			Paul.incrementGrade();
+			std::cout << Paul;
+			Paul.decrementGrade();
+			std::cout << Paul;
+			Paul.decrementGrade();
+			std::cout << Paul;
+		}
+		catch (std::exception& error)
+		{
+			std::cout << error.what() << std::endl;
+		}
 	}
 
-	delete Paul;
-	delete Copy;
-	delete Default;
+	std::cout << std::endl;
+	std::cout << "TEST 2" << std::endl;
+
+	{
+		try
+		{
+			Bureaucrat	Paul( "Paul", 151 );
+
+			std::cout << Paul;
+		}
+		catch (std::exception& error)
+		{
+			std::cout << error.what() << std::endl;
+		}
+	}
+
+	std::cout << std::endl;
+	std::cout << "TEST 3" << std::endl;
+
+	{
+		try
+		{
+			Bureaucrat	Paul( "Paul", 0 );
+
+			std::cout << Paul;
+		}
+		catch (std::exception& error)
+		{
+			std::cout << error.what() << std::endl;
+		}
+	}
+
+	std::cout << std::endl;
+	std::cout << "TEST 4" << std::endl;
+
+	{
+		try
+		{
+			Bureaucrat	Paul( "Paul", 149 );
+
+			std::cout << Paul;
+			Paul.decrementGrade();
+			std::cout << Paul;
+			Paul.decrementGrade();
+			std::cout << Paul;
+		}
+		catch (std::exception& error)
+		{
+			std::cout << error.what() << std::endl;
+		}
+	}
+
+	std::cout << std::endl;
+	std::cout << "TEST 5" << std::endl;
+
+	{
+		try
+		{
+			Bureaucrat	Paul( "Paul", 2 );
+
+			std::cout << Paul;
+			Paul.incrementGrade();
+			std::cout << Paul;
+			Paul.incrementGrade();
+			std::cout << Paul;
+		}
+		catch (std::exception& error)
+		{
+			std::cout << error.what() << std::endl;
+		}
+	}
 
 	return 0;
 }
