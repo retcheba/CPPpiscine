@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:37:10 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/25 13:45:22 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/25 14:49:04 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <string>
+# include <stdexcept>
 
 class Bureaucrat
 {

@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:36:58 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/25 14:02:44 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:11:26 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name), _grade(grad
 Bureaucrat::Bureaucrat( Bureaucrat const & src ) : _name(src._name), _grade(src._grade)
 {
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
-	*this = src; 
+	*this = src;
 
 	return;
 }
@@ -57,17 +57,29 @@ int		Bureaucrat::getGrade( void ) const
 void	Bureaucrat::incrementGrade( void )
 {
 	this->_grade -= 1;
+	if ( _grade < 1 )
+		throw std::string("Error: Grade Too High");
+	if ( _grade > 150 )
+		throw std::string("Error: Grade Too Low");
 	return;
 }
 
 void	Bureaucrat::decrementGrade( void )
 {
 	this->_grade += 1;
+	if ( _grade < 1 )
+		throw std::string("Error: Grade Too High");
+	if ( _grade > 150 )
+		throw std::string("Error: Grade Too Low");
 	return;
 }
 
 std::ostream &	operator<<( std::ostream & o, Bureaucrat const & rhs )
 {
+	if ( rhs.getGrade() < 1 )
+		throw std::string("Error: Grade Too High");
+	if ( rhs.getGrade() > 150 )
+		throw std::string("Error: Grade Too Low");
 	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
 
 	return o;
