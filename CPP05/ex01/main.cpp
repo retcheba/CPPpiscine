@@ -6,32 +6,49 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:58:36 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/25 17:00:47 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/26 13:41:18 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int	main( void )
 {
-	std::cout << "TEST 1" << std::endl; //OK
+	std::cout << "TEST 1" << std::endl;
 	{
 		try
 		{
 			Bureaucrat	Paul( "Paul", 50 );
-			Bureaucrat	Copy( Paul );
-			Bureaucrat	Default;
+			Form		Form1( "Form1", 100, 50 );
 
 			std::cout << Paul;
-			std::cout << Copy;
-			std::cout << Default;
+			std::cout << Form1;
 
-			Paul.incrementGrade();
+			Paul.signForm(Form1);
+			std::cout << Form1;
+		}
+		catch (std::exception& error)
+		{
+			std::cout << error.what() << std::endl;
+		}
+	}
+	std::cout << std::endl;
+	std::cout << "TEST 2" << std::endl;
+
+	{
+		try
+		{
+			Bureaucrat	Paul( "Paul", 50 );
+			Form		Form1( "Form1", 100, 50 );
+
 			std::cout << Paul;
-			Paul.decrementGrade();
-			std::cout << Paul;
-			Paul.decrementGrade();
-			std::cout << Paul;
+			std::cout << Form1;
+
+			Paul.signForm(Form1);
+			std::cout << Form1;
+			Paul.signForm(Form1);
+			std::cout << Form1;
 		}
 		catch (std::exception& error)
 		{
@@ -40,14 +57,19 @@ int	main( void )
 	}
 
 	std::cout << std::endl;
-	std::cout << "TEST 2" << std::endl; //KO
+	std::cout << "TEST 3" << std::endl;
 
 	{
 		try
 		{
-			Bureaucrat	Paul( "Paul", 151 );
+			Bureaucrat	Paul( "Paul", 150 );
+			Form		Form1( "Form1", 100, 50 );
 
 			std::cout << Paul;
+			std::cout << Form1;
+
+			Paul.signForm(Form1);
+			std::cout << Form1;
 		}
 		catch (std::exception& error)
 		{
@@ -56,14 +78,14 @@ int	main( void )
 	}
 
 	std::cout << std::endl;
-	std::cout << "TEST 3" << std::endl; //KO
+	std::cout << "TEST 4" << std::endl;
 
 	{
 		try
 		{
-			Bureaucrat	Paul( "Paul", 0 );
+			Form	Form1( "Form1", 0, 50 );
 
-			std::cout << Paul;
+			std::cout << Form1;
 		}
 		catch (std::exception& error)
 		{
@@ -72,38 +94,14 @@ int	main( void )
 	}
 
 	std::cout << std::endl;
-	std::cout << "TEST 4" << std::endl; //KO
+	std::cout << "TEST 5" << std::endl;
 
 	{
 		try
 		{
-			Bureaucrat	Paul( "Paul", 149 );
+			Form	Form1( "Form1", 100, 0 );
 
-			std::cout << Paul;
-			Paul.decrementGrade();
-			std::cout << Paul;
-			Paul.decrementGrade();
-			std::cout << Paul;
-		}
-		catch (std::exception& error)
-		{
-			std::cout << error.what() << std::endl;
-		}
-	}
-
-	std::cout << std::endl;
-	std::cout << "TEST 5" << std::endl; //KO
-
-	{
-		try
-		{
-			Bureaucrat	Paul( "Paul", 2 );
-
-			std::cout << Paul;
-			Paul.incrementGrade();
-			std::cout << Paul;
-			Paul.incrementGrade();
-			std::cout << Paul;
+			std::cout << Form1;
 		}
 		catch (std::exception& error)
 		{

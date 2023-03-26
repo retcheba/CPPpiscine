@@ -1,4 +1,4 @@
-SRCS		= main.cpp Bureaucrat.cpp
+SRCS		= main.cpp Bureaucrat.cpp Form.cpp
 OBJS		= $(SRCS:.cpp=.o)
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
