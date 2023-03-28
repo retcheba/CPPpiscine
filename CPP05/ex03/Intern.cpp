@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 18:47:13 by retcheba          #+#    #+#             */
-/*   Updated: 2023/03/27 20:00:07 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/03/28 16:05:15 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ Intern &	Intern::operator=( Intern const & rhs )
 Form*	Intern::makeForm( std::string nameForm, std::string target )
 {
 	std::string	nameForms[3] = { "ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm" };
-	Form*	form;
+	Form*	form = NULL;
 	int	n;
 
 	for (n = 0; n < 3; n++)
