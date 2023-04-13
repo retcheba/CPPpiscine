@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 16:25:07 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/13 10:08:49 by retcheba         ###   ########.fr       */
+/*   Created: 2023/04/13 09:50:54 by retcheba          #+#    #+#             */
+/*   Updated: 2023/04/13 10:15:15 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
 #include "ScalarConverter.hpp"
 
-int	main( int argc, char **argv )
+ScalarConverter::ScalarConverter( void )
 {
-	if ( argc != 2 )
-	{
-		std::cout << "Wrong number of arguments" << std::endl;
-	}
-	else
-	{
-		ScalarConverter::convert((std::string)argv[1]);
-	}
-	return 0;
+	return;
+}
+
+ScalarConverter::ScalarConverter( ScalarConverter const & src )
+{
+	*this = src;
+	return;
+}
+
+ScalarConverter &	ScalarConverter::operator=( ScalarConverter const & rhs )
+{
+	(void)rhs;
+	return (*this);
+}
+
+ScalarConverter::~ScalarConverter( void )
+{
+	return;
+}
+
+void	ScalarConverter::convert( const std::string input )
+{
+	std::cout << "input: " << input << std::endl;
+	return;
 }

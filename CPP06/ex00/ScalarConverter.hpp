@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 16:25:07 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/13 10:08:49 by retcheba         ###   ########.fr       */
+/*   Created: 2023/04/13 09:50:46 by retcheba          #+#    #+#             */
+/*   Updated: 2023/04/13 10:13:34 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
-#include "ScalarConverter.hpp"
+#ifndef SCALARCONVERTER_HPP
+# define SCALARCONVERTER_HPP
 
-int	main( int argc, char **argv )
+# include <iostream>
+# include <string>
+
+class ScalarConverter
 {
-	if ( argc != 2 )
-	{
-		std::cout << "Wrong number of arguments" << std::endl;
-	}
-	else
-	{
-		ScalarConverter::convert((std::string)argv[1]);
-	}
-	return 0;
-}
+
+public:
+
+	ScalarConverter( ScalarConverter const & src );
+	~ScalarConverter( void );
+
+	ScalarConverter &	operator=( ScalarConverter const & rhs );
+
+	static void			convert( const std::string input );
+
+private:
+
+	ScalarConverter( void );
+
+
+};
+
+#endif

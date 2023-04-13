@@ -1,8 +1,8 @@
-SRCS		= main.cpp
+SRCS		= main.cpp ScalarConverter.cpp
 OBJS		= $(SRCS:.cpp=.o)
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
-NAME		= brain
+NAME		= converter
 RM			= rm -f
 
 all:		$(NAME)
