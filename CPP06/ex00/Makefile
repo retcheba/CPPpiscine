@@ -1,7 +1,7 @@
 SRCS		= main.cpp ScalarConverter.cpp
 OBJS		= $(SRCS:.cpp=.o)
 CC			= c++
-CFLAGS		= -g -Wall -Wextra -Werror -std=c++98
+CFLAGS		= -Wall -Wextra -Werror -std=c++98
 NAME		= convert
 RM			= rm -f
 

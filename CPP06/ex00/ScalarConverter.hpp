@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 09:50:46 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/13 16:09:44 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:52:44 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ public:
 
 	ScalarConverter &	operator=( ScalarConverter const & rhs );
 
-	static void		convert( std::string input );
+	static void	convert( std::string input );
 
 private:
 

@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 16:25:07 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/13 18:59:06 by retcheba         ###   ########.fr       */
+/*   Created: 2023/04/13 18:21:59 by retcheba          #+#    #+#             */
+/*   Updated: 2023/04/13 18:43:46 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Serializer.hpp"
-#include "Data.hpp"
+#ifndef SERIALIZER_HPP
+# define SERIALIZER_HPP
 
-int	main( void )
+# include <iostream>
+# include <string>
+# include <stdint.h>
+# include "Data.hpp"
+
+class Serializer
 {
-	Data	lol;
-	lol.data = "caca";
-	
-	std::cout << "Data: " << Serializer::deserialize(Serializer::serialize(&lol))->data << std::endl;
 
-	return 0;
-}
+public:
+
+	Serializer( Serializer const & src );
+	~Serializer( void );
+
+	Serializer &		operator=( Serializer const & rhs );
+	static uintptr_t	serialize(Data* ptr);
+	static Data*		deserialize(uintptr_t raw);
+
+private:
+
+	Serializer( void );
+
+};
+
+#endif

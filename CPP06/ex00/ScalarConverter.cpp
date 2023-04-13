@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 09:50:54 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/13 16:22:25 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:19:34 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ void	ScalarConverter::convert( std::string input )
 	{
 		if ( input[input.length() - 1 ] == 'f' && input[input.length() - 2 ] == 'f' )
 			input.erase((input.length() - 1), 1);
+		if ( input[0] == '+' )
+			input.erase(0, 1);
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: " << input << "f" << std::endl;

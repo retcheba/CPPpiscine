@@ -1,8 +1,8 @@
-SRCS		= main.cpp
+SRCS		= main.cpp Serializer.cpp
 OBJS		= $(SRCS:.cpp=.o)
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
-NAME		= brain
+NAME		= Serializer
 RM			= rm -f
 
 all:		$(NAME)

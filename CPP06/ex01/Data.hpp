@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 16:25:07 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/13 18:59:06 by retcheba         ###   ########.fr       */
+/*   Created: 2023/04/13 18:27:12 by retcheba          #+#    #+#             */
+/*   Updated: 2023/04/13 18:58:29 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Serializer.hpp"
-#include "Data.hpp"
+#ifndef DATA_HPP
+# define DATA_HPP
 
-int	main( void )
+struct Data
 {
-	Data	lol;
-	lol.data = "caca";
-	
-	std::cout << "Data: " << Serializer::deserialize(Serializer::serialize(&lol))->data << std::endl;
 
-	return 0;
-}
+	std::string	data;
+
+};
+
+#endif
