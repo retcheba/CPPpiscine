@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:25:07 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/13 10:08:49 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:23:37 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@
 int	main( int argc, char **argv )
 {
 	if ( argc != 2 )
-	{
-		std::cout << "Wrong number of arguments" << std::endl;
-	}
+		std::cout << "Error: Wrong number of arguments" << std::endl;
 	else
-	{
 		ScalarConverter::convert((std::string)argv[1]);
-	}
 	return 0;
 }

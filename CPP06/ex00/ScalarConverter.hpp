@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 09:50:46 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/13 11:19:03 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:09:44 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <iostream>
 # include <string>
+# include <cstdlib>
+# include <cstring>
 
 class ScalarConverter
 {
@@ -32,9 +34,11 @@ private:
 
 	ScalarConverter( void );
 	static int	getType( std::string input );
+	static bool	isZero( std::string input );
 	static bool	isChar( std::string input );
 	static bool	isInf( std::string input );
 	static bool	isNan( std::string input );
+	static bool	isNumeric( std::string input );
 
 };
 
