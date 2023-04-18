@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:03 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/17 19:48:22 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/18 17:22:01 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SPAN_HPP
 
 # include <iostream>
-# include <string>
+# include <cstdlib>
 # include <vector>
 # include <exception>
 
@@ -30,7 +30,11 @@ public:
 
 	Span &	operator=( Span const & rhs );
 
-	void	addNumber( int nb );
+	void			addNumber( int nb );
+	void			addManyNumbers( unsigned int range, int nb );
+	unsigned int	shortestSpan( void );
+	unsigned int	longestSpan( void );
+	void			printSpan( void );
 
 private:
 
