@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:03 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/18 17:22:01 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/18 17:33:51 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <vector>
 # include <exception>
 
-class	Span
+class Span
 {
 
 public:
