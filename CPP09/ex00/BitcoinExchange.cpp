@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:02:23 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/19 23:55:29 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:04:54 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,24 +191,22 @@ void	BitcoinExchange::convert( void )
 
 	for ( int i = 1; i < this->_lenInput; i++ )
 	{
+
 		str = this->_input[i];
 		found = str.find(" | ");
 
 		if ( found != std::string::npos )
 		{
+
 			date = str.substr(0, found);
 			value = str.substr(found + 3, (str.length() - found - 3));
 
 			d = strtod(value.c_str(), &endptr);
 
-			if (*endptr)
-				std::cerr << "Error: bad input => " << str  << std::endl;
-			else
+			if (!(*endptr))
 			{
 
-				if (strptime(date.c_str(), "%Y-%m-%d", &result) == NULL)
-					std::cerr << "Error: bad input => " << str << std::endl;
-				else
+				if (strptime(date.c_str(), "%Y-%m-%d", &result) != NULL)
 				{
 
 					if ( d < 0 )
@@ -221,21 +219,22 @@ void	BitcoinExchange::convert( void )
 						index = getIndex(result);
 						price = d * this->_price[index];
 
-//						std::cout << "index: " << index << std::endl;
-//						std::cout << "price: " << this->_price[index] << std::endl;
-//						std::cout << "data: " << this->_data[index + 1] << std::endl;
-
 						std::cout << date << " => " << d << " = " << price << std::endl;
 
 					}
 
 				}
+				else
+					std::cerr << "Error: bad input => " << str << std::endl;
 
 			}
+			else
+				std::cerr << "Error: bad input => " << str  << std::endl;
+
 		}
 		else
 			std::cerr << "Error: bad input => " << str << std::endl;
-		
+
 	}
 
 	return;
