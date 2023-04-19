@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:02:11 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/19 19:21:01 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:18:06 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <fstream>
 # include <string>
+# include <time.h>
 # include <map>
 # include <algorithm>
 # include <exception>
@@ -33,12 +34,17 @@ public:
 	BitcoinExchange &	operator=( BitcoinExchange const & rhs );
 	void	getInput( void );
 	void	getData( void );
+	void	getDate( void );
+	void	getPrice( void );
+	int		getIndex( struct tm date );
 	void	convert( void );
 
 private:
 
 	std::map< int, std::string >	_input;
 	std::map< int, std::string >	_data;
+	std::map< int, struct tm >		_date;
+	std::map< int, double >			_price;
 	char	*_infile;
 	int		_lenInput;
 	int		_lenData;
