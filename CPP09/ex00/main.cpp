@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 14:54:32 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/19 19:28:50 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:30:42 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main( int argc, char **argv )
 {
 	if ( argc != 2 )
 	{
-		std::cerr << "Error: wrong number of arguments" << std::endl;
+		std::cerr << RED << "Error: wrong number of arguments" << WHITE << std::endl;
 		return 1;
 	}
 

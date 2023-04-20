@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:02:23 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/20 00:04:54 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/20 20:21:40 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	BitcoinExchange::getInput( void )
 
 	if (!ifs.is_open())
 	{
-		std::cerr << "Error: cannot open the input file" << std::endl;
+		std::cerr << RED << "Error: cannot open the input file" << WHITE << std::endl;
 		throw (std::exception());
 	}
 
@@ -76,7 +76,7 @@ void	BitcoinExchange::getData( void )
 
 	if (!ifs.is_open())
 	{
-		std::cerr << "Error: cannot open the 'data.csv' file" << std::endl;
+		std::cerr << RED  << "Error: cannot open the 'data.csv' file" << WHITE << std::endl;
 		throw (std::exception());
 	}
 
@@ -100,6 +100,7 @@ void	BitcoinExchange::getDate( void )
 	std::size_t found;
 	std::string	str;
 	std::string	date;
+	char		*endptr;
 
 	for ( int i = 1; i < this->_lenData; i++ )
 	{
@@ -109,7 +110,22 @@ void	BitcoinExchange::getDate( void )
 		if ( found != std::string::npos )
 		{
 			date = str.substr(0, found);
-			strptime(date.c_str(), "%Y-%m-%d", &this->_date[i - 1]);
+			endptr = strptime(date.c_str(), "%Y-%m-%d", &this->_date[i - 1]);
+			if (endptr == NULL && *endptr == '\0')
+			{
+				std::cerr << RED  << "Error: bad data in the file 'data.csv' on the line => " << WHITE << str << std::endl;
+				throw (std::exception());
+			}
+			if ( beforeCreationBtc(this->_date[i - 1]) )
+			{
+				std::cerr << RED  << "Error: date before the creation of bitcoin in the file 'data.csv' on the line => " << WHITE << str << std::endl;
+				throw (std::exception());
+			}
+		}
+		else
+		{
+			std::cerr << RED  << "Error: bad data in the file 'data.csv' on the line => " << WHITE << str << std::endl;
+			throw (std::exception());
 		}
 	}
 	return;
@@ -134,6 +150,16 @@ void	BitcoinExchange::getPrice( void )
 			d = strtod(price.c_str(), &endptr);
 			if (!(*endptr))
 				this->_price[i - 1] = d;
+			else
+			{
+				std::cerr << RED  << "Error: bad data in the file 'data.csv' on the line => " << WHITE << str << std::endl;
+				throw (std::exception());
+			}
+		}
+		else
+		{
+			std::cerr << RED  << "Error: bad data in the file 'data.csv' on the line => " << WHITE << str << std::endl;
+			throw (std::exception());
 		}
 	}
 	return;
@@ -143,19 +169,49 @@ int		BitcoinExchange::getIndex( struct tm date )
 {
 	int	i = 0;
 
-	while ( this->_date[i].tm_year < date.tm_year && i < this->_lenData )
-		i++;
-	
-	while ( this->_date[i].tm_mon < date.tm_mon && i < this->_lenData )
+	while ( this->_date[i].tm_year < date.tm_year && i < (this->_lenData - 2) )
 		i++;
 
-	while ( this->_date[i].tm_mday < date.tm_mday && i < this->_lenData )
-		i++;
-	
-	if ( this->_date[i].tm_mday > date.tm_mday )
-		i--;
+	if ( this->_date[i].tm_year == date.tm_year && i < (this->_lenData - 2) )
+	{
+		while ( this->_date[i].tm_mon < date.tm_mon && this->_date[i].tm_year == date.tm_year && i < (this->_lenData - 2) )
+			i++;
+		if ( this->_date[i].tm_mon == date.tm_mon && this->_date[i].tm_year == date.tm_year && i < (this->_lenData - 2) )
+		{
+
+			while ( (this->_date[i].tm_mon == date.tm_mon) && (this->_date[i].tm_year == date.tm_year) && (this->_date[i].tm_mday < date.tm_mday) && i < (this->_lenData - 2) )
+				i++;
+
+		}
+
+        if (this->_date[i].tm_year > date.tm_year)
+            i--;
+        else if (this->_date[i].tm_year == date.tm_year)
+        {
+            if (this->_date[i].tm_mon > date.tm_mon)
+                i--;
+            else if (this->_date[i].tm_mon == date.tm_mon)
+            {
+                if (this->_date[i].tm_mday > date.tm_mday)
+                    i--;
+            }
+        }
+
+	}
 
 	return (i);
+}
+
+bool	BitcoinExchange::beforeCreationBtc( struct tm date )
+{
+	if ( date.tm_year < 109 )
+		return true;
+	else if ( date.tm_year == 109 )
+	{
+		if ( date.tm_mon == 0 && date.tm_mday < 3 )
+			return true;
+	}
+	return false;
 }
 
 void	BitcoinExchange::convert( void )
@@ -174,7 +230,13 @@ void	BitcoinExchange::convert( void )
 
 	if ( this->_input[0].compare("date | value") != 0 )
 	{
-		std::cerr << "Error: wrong input file header" << std::endl;
+		std::cerr << RED  << "Error: wrong input file header" << WHITE << std::endl;
+		throw (std::exception());
+	}
+
+	if ( this->_data[0].compare("date,exchange_rate") != 0 )
+	{
+		std::cerr << RED  << "Error: wrong 'data.csv' file header" << WHITE << std::endl;
 		throw (std::exception());
 	}
 
@@ -184,6 +246,7 @@ void	BitcoinExchange::convert( void )
 	std::string	value;
 	std::size_t found;
 	char		*endptr;
+	char		*endptr2;
 	double		d;
 	struct tm	result;
 	double		price;
@@ -206,34 +269,48 @@ void	BitcoinExchange::convert( void )
 			if (!(*endptr))
 			{
 
-				if (strptime(date.c_str(), "%Y-%m-%d", &result) != NULL)
+				endptr2 = strptime(date.c_str(), "%Y-%m-%d", &result);
+				if (endptr2 != NULL && *endptr2 == '\0')
 				{
 
-					if ( d < 0 )
-						std::cerr << "Error: not a positive number" << std::endl;
-					else if ( d > 1000 )
-						std::cerr << "Error: too large a number" << std::endl;
+					if ( beforeCreationBtc(result) )
+						std::cerr << RED  << "Error: date before the creation of bitcoin" << WHITE << std::endl;
 					else
 					{
-						
-						index = getIndex(result);
-						price = d * this->_price[index];
 
-						std::cout << date << " => " << d << " = " << price << std::endl;
+						if ( d < 0 )
+							std::cerr << RED  << "Error: not a positive number" << WHITE << std::endl;
+						else if ( d > 1000 )
+							std::cerr << RED  << "Error: too large a number" << WHITE << std::endl;
+						else
+						{
+							
+							index = getIndex(result);
+							price = d * this->_price[index];
+
+//							std::cout << "index: " << index << std::endl;
+//							std::cout << "price: " << this->_price[index] << std::endl;
+//							std::cout << "data: " << this->_data[index + 1] << std::endl;
+//							std::cout << "date: " << this->_date[index].tm_mday << std::endl;
+//							std::cout << "result: " << result.tm_mday << std::endl;
+
+							std::cout << YELLOW << date << " => " << d << " = " << price << WHITE << std::endl;
+
+						}
 
 					}
 
 				}
 				else
-					std::cerr << "Error: bad input => " << str << std::endl;
+					std::cerr << RED  << "Error: bad input => " << WHITE << str << std::endl;
 
 			}
 			else
-				std::cerr << "Error: bad input => " << str  << std::endl;
+				std::cerr << RED  << "Error: bad input => " << WHITE << str  << std::endl;
 
 		}
 		else
-			std::cerr << "Error: bad input => " << str << std::endl;
+			std::cerr << RED  << "Error: bad input => " << WHITE << str << std::endl;
 
 	}
 

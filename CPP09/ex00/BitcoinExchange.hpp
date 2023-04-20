@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:02:11 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/19 23:18:06 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/20 20:10:26 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <map>
 # include <algorithm>
 # include <exception>
+
+# define RED "\033[1;91m"
+# define YELLOW "\033[1;93m"
+# define WHITE "\033[0m"
 
 class BitcoinExchange
 {
@@ -38,6 +42,7 @@ public:
 	void	getPrice( void );
 	int		getIndex( struct tm date );
 	void	convert( void );
+	bool	beforeCreationBtc( struct tm date );
 
 private:
 
