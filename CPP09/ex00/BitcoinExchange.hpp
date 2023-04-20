@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:02:11 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/20 20:10:26 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/20 21:01:55 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ public:
 	int		getIndex( struct tm date );
 	void	convert( void );
 	bool	beforeCreationBtc( struct tm date );
+	bool	wrongDate( struct tm date );
 
 private:
 

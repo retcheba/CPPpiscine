@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:02:23 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/20 20:21:40 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/20 21:36:22 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,11 @@ void	BitcoinExchange::getDate( void )
 				std::cerr << RED  << "Error: date before the creation of bitcoin in the file 'data.csv' on the line => " << WHITE << str << std::endl;
 				throw (std::exception());
 			}
+			if ( wrongDate(this->_date[i - 1]) )
+			{
+				std::cerr << RED  << "Error: invalid date in the file 'data.csv' on the line => " << WHITE << str << std::endl;
+				throw (std::exception());
+			}
 		}
 		else
 		{
@@ -214,6 +219,29 @@ bool	BitcoinExchange::beforeCreationBtc( struct tm date )
 	return false;
 }
 
+bool	BitcoinExchange::wrongDate( struct tm date )
+{
+	if ( date.tm_mon == 3 || date.tm_mon == 5 || date.tm_mon == 8 || date.tm_mon == 10 )
+	{
+		if ( date.tm_mday == 31 )
+			return true;
+	}
+	if ( date.tm_mon == 1 )
+	{
+		if ( date.tm_year % 4 == 0 && date.tm_year % 100 != 0 )
+		{
+			if ( date.tm_mday > 29 )
+				return true;
+		}
+		else
+		{
+			if ( date.tm_mday > 28 )
+				return true;
+		}
+	}
+	return false;
+}
+
 void	BitcoinExchange::convert( void )
 {
 //	INPUT.TXT
@@ -273,32 +301,42 @@ void	BitcoinExchange::convert( void )
 				if (endptr2 != NULL && *endptr2 == '\0')
 				{
 
-					if ( beforeCreationBtc(result) )
-						std::cerr << RED  << "Error: date before the creation of bitcoin" << WHITE << std::endl;
-					else
+					if ( !wrongDate(result) )
 					{
 
-						if ( d < 0 )
-							std::cerr << RED  << "Error: not a positive number" << WHITE << std::endl;
-						else if ( d > 1000 )
-							std::cerr << RED  << "Error: too large a number" << WHITE << std::endl;
+						if ( beforeCreationBtc(result) )
+							std::cerr << RED  << "Error: date before the creation of bitcoin" << WHITE << std::endl;
 						else
 						{
-							
-							index = getIndex(result);
-							price = d * this->_price[index];
 
-//							std::cout << "index: " << index << std::endl;
-//							std::cout << "price: " << this->_price[index] << std::endl;
-//							std::cout << "data: " << this->_data[index + 1] << std::endl;
-//							std::cout << "date: " << this->_date[index].tm_mday << std::endl;
-//							std::cout << "result: " << result.tm_mday << std::endl;
+							if ( d < 0 )
+								std::cerr << RED  << "Error: not a positive number" << WHITE << std::endl;
+							else if ( d > 1000 )
+								std::cerr << RED  << "Error: too large a number" << WHITE << std::endl;
+							else
+							{
+								
+								index = getIndex(result);
+								price = d * this->_price[index];
 
-							std::cout << YELLOW << date << " => " << d << " = " << price << WHITE << std::endl;
+	//							std::cout << "index: " << index << std::endl;
+	//							std::cout << "price: " << this->_price[index] << std::endl;
+	//							std::cout << "data: " << this->_data[index + 1] << std::endl;
+	//							std::cout << "date: " << this->_date[index].tm_mday << std::endl;
+	//							std::cout << "mday: " << this->_date[index].tm_mday << std::endl;
+	//							std::cout << "mon: " << this->_date[index].tm_mon << std::endl;
+	//							std::cout << "year: " << this->_date[index].tm_year << std::endl;
+	//							std::cout << "result: " << result.tm_mday << std::endl;
+
+								std::cout << YELLOW << date << " => " << d << " = " << price << WHITE << std::endl;
+
+							}
 
 						}
 
 					}
+					else
+						std::cerr << RED  << "Error: invalid date => " << WHITE << str << std::endl;
 
 				}
 				else
