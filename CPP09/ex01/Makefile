@@ -1,8 +1,8 @@
-SRCS		= main.cpp
+SRCS		= main.cpp RPN.cpp
 OBJS		= $(SRCS:.cpp=.o)
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
-NAME		= a.out
+NAME		= RPN
 RM			= rm -f
 
 all:		$(NAME)

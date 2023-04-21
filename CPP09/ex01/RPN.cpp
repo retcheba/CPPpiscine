@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 14:54:32 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/21 16:40:30 by retcheba         ###   ########.fr       */
+/*   Created: 2023/04/21 16:22:25 by retcheba          #+#    #+#             */
+/*   Updated: 2023/04/21 16:39:20 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-int	main( int argc, char **argv )
+RPN::RPN( void )
 {
-	if (argc != 2)
+	return;
+}
+
+RPN::RPN( RPN const & src )
+{
+	*this = src;
+
+	return;
+}
+
+RPN::~RPN( void )
+{
+	return;
+}
+
+RPN &	RPN::operator=( RPN const & rhs )
+{
+	if ( this != &rhs )
 	{
-		std::cerr << RED << "Error: wrong number of arguments" << WHITE << std::endl;
-		return 1;
 	}
-	
-	return 0;
+	return (*this);
 }
