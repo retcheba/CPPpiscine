@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:22:25 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/21 19:09:46 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:13:24 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,6 @@ void	RPN::calculate( void )
 	if ( this->_stack.size() != 1 )
 	{
 		std::cerr << RED << "Error: wrong input" << WHITE << std::endl;
-		while ( this->_stack.size() )
-		{
-			std::cout << this->_stack.top() << std::endl;
-			this->_stack.pop();
-		}
 		throw (std::exception());
 	}
 	else
