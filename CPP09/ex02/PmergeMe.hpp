@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:17:28 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/22 20:09:15 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/23 00:31:13 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,23 @@ public:
 	PmergeMe( PmergeMe const & src );
 	~PmergeMe( void );
 
-	PmergeMe &		operator=( PmergeMe const & rhs );
-	void			sort( void );
-	void			fillContainer( void );
-	bool			isZero( std::string str );
-	void			mergeSortList( void );
-	void			mergeSortVector( void );
-	std::list<int>	insertSort( std::list<int> list );
-	void			algo1( void );
-	void			algo2( void );
-	void			algo3( void );
-	void			algo4( void );
+	PmergeMe &			operator=( PmergeMe const & rhs );
+	void				sort( void );
+	void				printList( void );
+	void				printVector( void );
+	void				fillContainer( void );
+	bool				isZero( std::string str );
+	std::list<int>		mergeInsertSortList( std::list<int> list );
+	std::vector<int>	mergeInsertSortVector( std::vector<int> vector );
+	std::list<int>		insertSortList( std::list<int> list );
+	std::vector<int>	insertSortVector( std::vector<int> vector );
 
 private:
 
-	std::list<int>		_unsortL;
-	std::list<int>		_sortL;
-	std::vector<int>	_unsortV;
-	std::vector<int>	_sortV;
+	std::list<int>		_list;
+	std::vector<int>	_vector;
 	char**				_argv;
 
 };
-
-bool	mycomparison( int first, int second );
 
 #endif

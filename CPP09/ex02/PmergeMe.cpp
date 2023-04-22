@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:17:12 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/22 20:29:26 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/23 00:35:14 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ PmergeMe &	PmergeMe::operator=( PmergeMe const & rhs )
 {
 	if ( this != &rhs )
 	{
+		this->_argv = rhs._argv;
 	}
 	return (*this);
 }
@@ -100,19 +101,14 @@ void	PmergeMe::fillContainer( void )
 
 		}
 
-		this->_unsortL.push_back(a);
-		this->_unsortV.push_back(a);
+		this->_list.push_back(a);
+		this->_vector.push_back(a);
 		i++;
 	}
 	return;
 }
 
-bool	mycomparison( int first, int second )
-{
-	return ( first < second );
-}
-
-std::list<int>	PmergeMe::insertSort( std::list<int> list )
+std::list<int>	PmergeMe::insertSortList( std::list<int> list )
 {
 	std::list<int>::iterator it = list.begin();
 
@@ -128,133 +124,112 @@ std::list<int>	PmergeMe::insertSort( std::list<int> list )
 	return (list);
 }
 
-void	PmergeMe::algo1( void )
+std::vector<int>	PmergeMe::insertSortVector( std::vector<int> vector )
 {
-	if ( this->_sortL.empty() )
+	std::vector<int>::iterator it = vector.begin();
+
+	int a = *it;
+	it++;
+	int	b = *it;
+
+	if ( a > b )
 	{
-		std::list<int>::iterator it = this->_unsortL.begin();
-		this->_sortL.push_back(*it);
+		vector.erase(vector.begin());
+		vector.push_back(a);
 	}
-	else
-		this->_sortL.merge(this->_unsortL, mycomparison);
-	if ( this->_unsortL.size() >= 1 )
-		this->_unsortL.pop_front();
-	return;
+	return (vector);
 }
 
-void	PmergeMe::algo2( void )
-{
-	this->_unsortL = insertSort( this->_unsortL );
-	if ( this->_sortL.empty() )
-	{
-		std::list<int>::iterator it = this->_unsortL.begin();
-		this->_sortL.push_back(*it);
-		it++;
-		this->_sortL.push_back(*it);
-	}
-	else
-		this->_sortL.merge(this->_unsortL, mycomparison);
-	if ( this->_unsortL.size() >= 2 )
-	{
-		this->_unsortL.pop_front();
-		this->_unsortL.pop_front();
-	}
-	return;
-}
-
-void	PmergeMe::algo3( void )
+std::list<int>	PmergeMe::mergeInsertSortList( std::list<int> list )
 {
 	std::list<int> first, second;
-	std::list<int>::iterator it = this->_unsortL.begin();
-
-	first.push_back(*it);
-	it++;
-	first.push_back(*it);
-	it++;
-	second.push_back(*it);
-
-	first = insertSort( first );
-	first.merge(second, mycomparison);
-
-	if ( this->_sortL.empty() )
+	
+	if ( list.size() > 2 )
 	{
-		it = first.begin();
-		this->_sortL.push_back(*it);
-		it++;
-		this->_sortL.push_back(*it);
-		it++;
-		this->_sortL.push_back(*it);
+		size_t	i = 0;
+		for ( std::list<int>::iterator it = list.begin(); it != list.end(); it++ )
+		{
+			if ( i < (list.size() / 2) )
+				first.push_back(*it);
+			else
+				second.push_back(*it);
+			i++;
+		}
+		first = mergeInsertSortList(first);
+		second = mergeInsertSortList(second);
+		first.merge( second );
+		return ( first );
+	}
+	else if ( list.size() == 2 )
+		return ( insertSortList(list) );
+
+	return ( list );
+}
+
+std::vector<int>	PmergeMe::mergeInsertSortVector( std::vector<int> vector )
+{
+	std::vector<int> first, second, result(vector.size());
+	
+	if ( vector.size() > 2 )
+	{
+		size_t	i = 0;
+		for ( std::vector<int>::iterator it = vector.begin(); it != vector.end(); it++ )
+		{
+			if ( i < (vector.size() / 2) )
+				first.push_back(*it);
+			else
+				second.push_back(*it);
+			i++;
+		}
+		first = mergeInsertSortVector(first);
+		second = mergeInsertSortVector(second);
+		std::merge( first.begin(), first.end(), second.begin(), second.end(), result.begin() );
+		return ( result );
+	}
+	else if ( vector.size() == 2 )
+		return ( insertSortVector(vector) );
+
+	return ( vector );
+}
+
+void	PmergeMe::printList( void )
+{
+	if ( this->_list.size() > 10 )
+	{
+		std::list<int>::iterator it = this->_list.begin();
+		for ( int i = 0; i < 10; i++ )
+		{
+			std::cout << " " << *it;
+			it++;
+		}
+		std::cout << " [...]";
 	}
 	else
-		this->_sortL.merge(first, mycomparison);
-	if ( this->_unsortL.size() >= 3 )
 	{
-		this->_unsortL.pop_front();
-		this->_unsortL.pop_front();
-		this->_unsortL.pop_front();
+		for ( std::list<int>::iterator it = this->_list.begin(); it != this->_list.end(); ++it )
+			std::cout << " " << *it;
 	}
-	return;
+	std::cout << std::endl;
 }
 
-void	PmergeMe::algo4( void )
+void	PmergeMe::printVector( void )
 {
-	std::list<int> first, second;
-	std::list<int>::iterator it = this->_unsortL.begin();
-
-	first.push_back(*it);
-	it++;
-	first.push_back(*it);
-	it++;
-	second.push_back(*it);
-	it++;
-	second.push_back(*it);
-
-	first = insertSort( first );
-	second = insertSort( second );
-	first.merge(second, mycomparison);
-
-	if ( this->_sortL.empty() )
+	if ( this->_vector.size() > 10 )
 	{
-		it = first.begin();
-		this->_sortL.push_back(*it);
-		it++;
-		this->_sortL.push_back(*it);
-		it++;
-		this->_sortL.push_back(*it);
-		it++;
-		this->_sortL.push_back(*it);
+		std::vector<int>::iterator it = this->_vector.begin();
+		for ( int i = 0; i < 10; i++ )
+		{
+			std::cout << " " << *it;
+			it++;
+		}
+		std::cout << " [...]";
 	}
 	else
-		this->_sortL.merge(first, mycomparison);
-	if ( this->_unsortL.size() >= 4 )
 	{
-		this->_unsortL.pop_front();
-		this->_unsortL.pop_front();
-		this->_unsortL.pop_front();
-		this->_unsortL.pop_front();
+		for ( std::vector<int>::iterator it = this->_vector.begin(); it != this->_vector.end(); ++it )
+			std::cout << " " << *it;
 	}
-	return;
-}
-
-void	PmergeMe::mergeSortList( void )
-{
-	while ( !this->_unsortL.empty() )
-	{
-		if ( this->_unsortL.size() == 1 )
-			algo1();
-		else if ( this->_unsortL.size() == 2 )
-			algo2();
-		else if ( this->_unsortL.size() == 3 )
-			algo3();
-		else if ( this->_unsortL.size() >= 4 )
-			algo4();
-	}
-	return;
-}
-
-void	PmergeMe::mergeSortVector( void )
-{
-	return;
+	std::cout << std::endl;
 }
 
 void	PmergeMe::sort( void )
@@ -265,18 +240,9 @@ void	PmergeMe::sort( void )
 		throw (std::exception());
 	}
 
-	fillContainer();
-
-	std::cout << "List Before:";
-	for ( std::list<int>::iterator it = this->_unsortL.begin(); it != this->_unsortL.end(); ++it )
-    	std::cout << " " << *it;
-	std::cout << std::endl;
-
-	std::cout << "Vector Before:";
-	for ( std::vector<int>::iterator it = this->_unsortV.begin(); it != this->_unsortV.end(); ++it )
-    	std::cout << " " << *it;
-	std::cout << std::endl;
-
+	struct timeval	start0;
+	struct timeval	end0;
+	double	chrono0;
 	struct timeval	start1;
 	struct timeval	end1;
 	double	chrono1;
@@ -284,28 +250,35 @@ void	PmergeMe::sort( void )
 	struct timeval	end2;
 	double	chrono2;
 
+	gettimeofday(&start0, NULL);
+	fillContainer();
+	gettimeofday(&end0, NULL);
+
+	std::cout << "List Before:";
+	printList();
+
+	std::cout << "Vector Before:";
+	printVector();
+
 	gettimeofday(&start1, NULL);
-	mergeSortList();
+	this->_list = mergeInsertSortList(this->_list);
 	gettimeofday(&end1, NULL);
 
 	gettimeofday(&start2, NULL);
-	mergeSortVector();
+	this->_vector = mergeInsertSortVector(this->_vector);
 	gettimeofday(&end2, NULL);
 
 	std::cout << "List After:";
-	for ( std::list<int>::iterator it = this->_sortL.begin(); it != this->_sortL.end(); ++it )
-    	std::cout << " " << *it;
-	std::cout << std::endl;
+	printList();
 
 	std::cout << "Vector After:";
-	for ( std::vector<int>::iterator it = this->_sortV.begin(); it != this->_sortV.end(); ++it )
-    	std::cout << " " << *it;
-	std::cout << std::endl;
+	printVector();
 
+	chrono0 = static_cast<double>(end0.tv_sec - start0.tv_sec) * 1000000 + static_cast<double>(end0.tv_usec - start0.tv_usec);
 	chrono1 = static_cast<double>(end1.tv_sec - start1.tv_sec) * 1000000 + static_cast<double>(end1.tv_usec - start1.tv_usec);
 	chrono2 = static_cast<double>(end2.tv_sec - start2.tv_sec) * 1000000 + static_cast<double>(end2.tv_usec - start2.tv_usec);
-	std::cout << "Time to process a range of " << this->_sortL.size() << " elements with std::list : " << chrono1 << " µs" << std::endl;
-	std::cout << "Time to process a range of " << this->_sortV.size() << " elements with std::vector : " << chrono2 << " µs" << std::endl;
+	std::cout << "Time to process a range of " << this->_list.size() << " elements with std::list : " << chrono1 + chrono0 << " µs" << std::endl;
+	std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector : " << chrono2 + chrono0 << " µs" << std::endl;
 
 	return;
 }
