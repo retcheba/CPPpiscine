@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:17:28 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/22 18:27:18 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:09:15 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,17 @@ public:
 	PmergeMe( PmergeMe const & src );
 	~PmergeMe( void );
 
-	PmergeMe &	operator=( PmergeMe const & rhs );
-	void		sort( void );
-	void		fillContainer( void );
-	bool		isZero( std::string str );
-	void		mergeSortList( void );
-	void		mergeSortVector( void );
-	void		algo1( void );
-	void		algo2( void );
-	void		algo3( void );
-	void		algo4( void );
+	PmergeMe &		operator=( PmergeMe const & rhs );
+	void			sort( void );
+	void			fillContainer( void );
+	bool			isZero( std::string str );
+	void			mergeSortList( void );
+	void			mergeSortVector( void );
+	std::list<int>	insertSort( std::list<int> list );
+	void			algo1( void );
+	void			algo2( void );
+	void			algo3( void );
+	void			algo4( void );
 
 private:
 

@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:17:12 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/22 19:11:40 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:29:26 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,22 @@ bool	mycomparison( int first, int second )
 	return ( first < second );
 }
 
+std::list<int>	PmergeMe::insertSort( std::list<int> list )
+{
+	std::list<int>::iterator it = list.begin();
+
+	int a = *it;
+	it++;
+	int	b = *it;
+
+	if ( a > b )
+	{
+		list.pop_front();
+		list.push_back(a);
+	}
+	return (list);
+}
+
 void	PmergeMe::algo1( void )
 {
 	if ( this->_sortL.empty() )
@@ -128,7 +144,7 @@ void	PmergeMe::algo1( void )
 
 void	PmergeMe::algo2( void )
 {
-	this->_unsortL.sort();
+	this->_unsortL = insertSort( this->_unsortL );
 	if ( this->_sortL.empty() )
 	{
 		std::list<int>::iterator it = this->_unsortL.begin();
@@ -157,7 +173,7 @@ void	PmergeMe::algo3( void )
 	it++;
 	second.push_back(*it);
 
-	first.sort();
+	first = insertSort( first );
 	first.merge(second, mycomparison);
 
 	if ( this->_sortL.empty() )
@@ -193,8 +209,8 @@ void	PmergeMe::algo4( void )
 	it++;
 	second.push_back(*it);
 
-	first.sort();
-	second.sort();
+	first = insertSort( first );
+	second = insertSort( second );
 	first.merge(second, mycomparison);
 
 	if ( this->_sortL.empty() )
@@ -233,7 +249,6 @@ void	PmergeMe::mergeSortList( void )
 		else if ( this->_unsortL.size() >= 4 )
 			algo4();
 	}
-
 	return;
 }
 
