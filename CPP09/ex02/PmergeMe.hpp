@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:17:28 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/22 16:49:48 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/22 18:27:18 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,21 @@ public:
 	bool		isZero( std::string str );
 	void		mergeSortList( void );
 	void		mergeSortVector( void );
+	void		algo1( void );
+	void		algo2( void );
+	void		algo3( void );
+	void		algo4( void );
 
 private:
 
-	std::list<int>		_l;
-	std::vector<int>	_v;
+	std::list<int>		_unsortL;
+	std::list<int>		_sortL;
+	std::vector<int>	_unsortV;
+	std::vector<int>	_sortV;
 	char**				_argv;
 
 };
+
+bool	mycomparison( int first, int second );
 
 #endif
