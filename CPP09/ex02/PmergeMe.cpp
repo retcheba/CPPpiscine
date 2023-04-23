@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:17:12 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/23 00:35:14 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/23 19:48:04 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,43 +110,88 @@ void	PmergeMe::fillContainer( void )
 
 std::list<int>	PmergeMe::insertSortList( std::list<int> list )
 {
-	std::list<int>::iterator it = list.begin();
+	std::list<int>::iterator it1 = list.begin();
+	std::list<int>::iterator it2 =  list.begin();
+	std::list<int>::iterator it3;
+	int	a;
+	int	b;
 
-	int a = *it;
-	it++;
-	int	b = *it;
+	it2++;
 
-	if ( a > b )
+	while ( it2 != list.end() )
 	{
-		list.pop_front();
-		list.push_back(a);
+		a = *it1;
+		b = *it2;
+		if ( a > b )
+		{
+			list.erase(it2);
+			it3 = it1;
+			while ( it3 != list.begin() )
+			{
+				if ( b > *it3 )
+					break;
+				it3--;
+			}
+			if ( b > *it3 )
+				it3++;
+			list.insert(it3, b);
+			it1 = it3;
+			it2 = it3;
+			it1--;
+		}
+		it1++;
+		it2++;
 	}
+
 	return (list);
 }
 
 std::vector<int>	PmergeMe::insertSortVector( std::vector<int> vector )
 {
-	std::vector<int>::iterator it = vector.begin();
+	std::vector<int>::iterator it1 = vector.begin();
+	std::vector<int>::iterator it2 =  vector.begin();
+	std::vector<int>::iterator it3;
+	int	a;
+	int	b;
 
-	int a = *it;
-	it++;
-	int	b = *it;
+	it2++;
 
-	if ( a > b )
+	while ( it2 != vector.end() )
 	{
-		vector.erase(vector.begin());
-		vector.push_back(a);
+		a = *it1;
+		b = *it2;
+		if ( a > b )
+		{
+			vector.erase(it2);
+			it3 = it1;
+			while ( it3 != vector.begin() )
+			{
+				if ( b > *it3 )
+					break;
+				it3--;
+			}
+			if ( b > *it3 )
+				it3++;
+			vector.insert(it3, b);
+			it1 = it3;
+			it2 = it3;
+			it1--;
+		}
+		it1++;
+		it2++;
 	}
+
 	return (vector);
 }
 
 std::list<int>	PmergeMe::mergeInsertSortList( std::list<int> list )
 {
 	std::list<int> first, second;
-	
-	if ( list.size() > 2 )
+
+	if ( list.size() > 50 )
 	{
 		size_t	i = 0;
+
 		for ( std::list<int>::iterator it = list.begin(); it != list.end(); it++ )
 		{
 			if ( i < (list.size() / 2) )
@@ -155,24 +200,25 @@ std::list<int>	PmergeMe::mergeInsertSortList( std::list<int> list )
 				second.push_back(*it);
 			i++;
 		}
+
 		first = mergeInsertSortList(first);
 		second = mergeInsertSortList(second);
+
 		first.merge( second );
+
 		return ( first );
 	}
-	else if ( list.size() == 2 )
-		return ( insertSortList(list) );
-
-	return ( list );
+	return ( insertSortList(list) );
 }
 
 std::vector<int>	PmergeMe::mergeInsertSortVector( std::vector<int> vector )
 {
 	std::vector<int> first, second, result(vector.size());
 	
-	if ( vector.size() > 2 )
+	if ( vector.size() > 40 )
 	{
 		size_t	i = 0;
+
 		for ( std::vector<int>::iterator it = vector.begin(); it != vector.end(); it++ )
 		{
 			if ( i < (vector.size() / 2) )
@@ -181,15 +227,15 @@ std::vector<int>	PmergeMe::mergeInsertSortVector( std::vector<int> vector )
 				second.push_back(*it);
 			i++;
 		}
+
 		first = mergeInsertSortVector(first);
 		second = mergeInsertSortVector(second);
+
 		std::merge( first.begin(), first.end(), second.begin(), second.end(), result.begin() );
+
 		return ( result );
 	}
-	else if ( vector.size() == 2 )
-		return ( insertSortVector(vector) );
-
-	return ( vector );
+	return ( insertSortVector(vector) );
 }
 
 void	PmergeMe::printList( void )
