@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:02:23 by retcheba          #+#    #+#             */
-/*   Updated: 2023/04/20 22:01:29 by retcheba         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:59:16 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,13 @@ void	BitcoinExchange::getDate( void )
 		{
 			date = str.substr(0, found);
 			endptr = strptime(date.c_str(), "%Y-%m-%d", &this->_date[i - 1]);
-			if (endptr == NULL && *endptr == '\0')
+
+			if ( endptr == NULL )
+			{
+				std::cerr << RED  << "Error: bad data in the file 'data.csv' on the line => " << WHITE << str << std::endl;
+				throw (std::exception());
+			}
+			if ( *endptr != '\0' )
 			{
 				std::cerr << RED  << "Error: bad data in the file 'data.csv' on the line => " << WHITE << str << std::endl;
 				throw (std::exception());
@@ -152,14 +158,27 @@ void	BitcoinExchange::getPrice( void )
 		if ( found != std::string::npos )
 		{
 			price = str.substr(found + 1, (str.length() - found - 1));
-			d = strtod(price.c_str(), &endptr);
-			if (!(*endptr))
-				this->_price[i - 1] = d;
-			else
+
+			if ( price.empty() )
 			{
 				std::cerr << RED  << "Error: bad data in the file 'data.csv' on the line => " << WHITE << str << std::endl;
 				throw (std::exception());
 			}
+
+			d = strtod(price.c_str(), &endptr);
+
+			if (endptr == NULL)
+			{
+				std::cerr << RED  << "Error: bad data in the file 'data.csv' on the line => " << WHITE << str << std::endl;
+				throw (std::exception());
+			}
+			if ( *endptr != '\0' )
+			{
+				std::cerr << RED  << "Error: bad data in the file 'data.csv' on the line => " << WHITE << str << std::endl;
+				throw (std::exception());
+			}
+
+			this->_price[i - 1] = d;
 		}
 		else
 		{
@@ -179,6 +198,7 @@ int		BitcoinExchange::getIndex( struct tm date )
 
 	if ( this->_date[i].tm_year == date.tm_year && i < (this->_lenData - 2) )
 	{
+
 		while ( this->_date[i].tm_mon < date.tm_mon && this->_date[i].tm_year == date.tm_year && i < (this->_lenData - 2) )
 			i++;
 		if ( this->_date[i].tm_mon == date.tm_mon && this->_date[i].tm_year == date.tm_year && i < (this->_lenData - 2) )
@@ -292,50 +312,72 @@ void	BitcoinExchange::convert( void )
 			date = str.substr(0, found);
 			value = str.substr(found + 3, (str.length() - found - 3));
 
-			d = strtod(value.c_str(), &endptr);
-
-			if (!(*endptr))
+			if ( !date.empty() && !value.empty() )
 			{
 
-				endptr2 = strptime(date.c_str(), "%Y-%m-%d", &result);
-				if (endptr2 != NULL && *endptr2 == '\0')
+				d = strtod(value.c_str(), &endptr);
+
+				if (endptr != NULL)
 				{
 
-					if ( !wrongDate(result) )
+					if ( *endptr == '\0' )
 					{
 
-						if ( beforeCreationBtc(result) )
-							std::cerr << RED  << "Error: date before the creation of bitcoin" << WHITE << std::endl;
-						else
+						endptr2 = strptime(date.c_str(), "%Y-%m-%d", &result);
+
+						if (endptr2 != NULL)
 						{
 
-							if ( d < 0 )
-								std::cerr << RED  << "Error: not a positive number" << WHITE << std::endl;
-							else if ( d > 1000 )
-								std::cerr << RED  << "Error: too large a number" << WHITE << std::endl;
-							else
+							if ( *endptr2 == '\0' )
 							{
 
-								index = getIndex(result);
-								price = d * this->_price[index];
+								if ( !wrongDate(result) )
+								{
 
-								std::cout << YELLOW << date << " => " << d << " = " << price << WHITE << std::endl;
+									if ( beforeCreationBtc(result) )
+										std::cerr << RED  << "Error: date before the creation of bitcoin" << WHITE << std::endl;
+									else
+									{
+
+										if ( d < 0 )
+											std::cerr << RED  << "Error: not a positive number" << WHITE << std::endl;
+										else if ( d > 1000 )
+											std::cerr << RED  << "Error: too large a number" << WHITE << std::endl;
+										else
+										{
+
+											index = getIndex(result);
+											price = d * this->_price[index];
+
+											std::cout << YELLOW << date << " => " << d << " = " << price << WHITE << std::endl;
+
+										}
+
+									}
+
+								}
+								else
+									std::cerr << RED  << "Error: invalid date => " << WHITE << str << std::endl;
 
 							}
+							else
+								std::cerr << RED  << "Error: bad input => " << WHITE << str << std::endl;
 
 						}
+						else
+							std::cerr << RED  << "Error: bad input => " << WHITE << str << std::endl;
 
 					}
 					else
-						std::cerr << RED  << "Error: invalid date => " << WHITE << str << std::endl;
+						std::cerr << RED  << "Error: bad input => " << WHITE << str << std::endl;
 
 				}
 				else
-					std::cerr << RED  << "Error: bad input => " << WHITE << str << std::endl;
+					std::cerr << RED  << "Error: bad input => " << WHITE << str  << std::endl;
 
 			}
 			else
-				std::cerr << RED  << "Error: bad input => " << WHITE << str  << std::endl;
+				std::cerr << RED  << "Error: bad input => " << WHITE << str << std::endl;
 
 		}
 		else
